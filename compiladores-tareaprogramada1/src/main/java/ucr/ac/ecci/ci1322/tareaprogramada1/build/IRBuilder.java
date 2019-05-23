@@ -27,8 +27,9 @@ public class IRBuilder {
      * @param classes the list of classes
      * @return a list with all the entities that represents each class and their information.
      */
-    public List<Entity> parse(List<Class> classes){
-        return interRep;
+    public void parse(List<Class> classes){
+        for( Class cl : classes )
+            ;
     }
 
     public List<Entity> getInterRep() {

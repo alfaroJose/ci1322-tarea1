@@ -50,6 +50,8 @@ public class Controller {
             scanner.printTables();
             scanner.printColumns();
 
+            builder.parse(scanner.getClassList());
+
             if(runScript){
                 System.out.println("hihi");
             }
