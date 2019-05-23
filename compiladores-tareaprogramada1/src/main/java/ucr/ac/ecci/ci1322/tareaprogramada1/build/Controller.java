@@ -51,7 +51,7 @@ public class Controller {
             scanner.printColumns();
 
             if(runScript){
-                System.out.println("Highdd");
+                System.out.println("hihi");
             }
         }
 
