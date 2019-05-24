@@ -2,6 +2,7 @@ package ucr.ac.ecci.ci1322.tareaprogramada1.model;
 
 public class Column {
     private String name;
+    private String type;
     private boolean updatable;
     private boolean nullable;
     private String length;
@@ -15,6 +16,7 @@ public class Column {
 
     public Column() {
         this.name = "";
+        this.type = "";
         this.updatable = true;
         this.nullable = true;
         this.length = "";
@@ -27,9 +29,10 @@ public class Column {
         this.discriminatorColumn = "";
     }
 
-    public Column(String name, boolean updatable, boolean nullable, String length, String precision, String scale,
+    public Column(String name, String type, boolean updatable, boolean nullable, String length, String precision, String scale,
                   boolean lob, String enumerated, boolean isTransient, boolean id, String discriminatorColumn) {
         this.name = name;
+        this.type = type;
         this.updatable = updatable;
         this.nullable = nullable;
         this.length = length;
@@ -53,6 +56,10 @@ public class Column {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 
     public boolean isUpdatable() {
         return updatable;
