@@ -13,4 +13,7 @@ public class PostGreSQLCodeGenerator implements CodeGenerator {
     public List<String> generateCode(List<Entity> interRep) {
         return null;
     }
+    public void generateScript(List<Entity> interRep, String path, String name)  {
+
+    };
 }

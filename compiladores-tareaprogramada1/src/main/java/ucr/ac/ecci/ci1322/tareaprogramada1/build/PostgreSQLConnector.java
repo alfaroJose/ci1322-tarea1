@@ -1,17 +1,17 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
+import java.util.List;
+
 /**
  * Abstract class that manages the connections and executes statements to a PostgreSQL DBMS.
  *  * Extends from DBConnector.
  */
 public class PostgreSQLConnector extends DBConnector {
-    public PostgreSQLConnector(Configuration configuration) {
-        super(configuration);
-    }
+    public PostgreSQLConnector (){}
 
     @Override
-    public boolean createConnection() {
-        return false;
+    public void createConnection(DBMSConfig config) {
+
     }
 
     @Override
@@ -20,7 +20,7 @@ public class PostgreSQLConnector extends DBConnector {
     }
 
     @Override
-    public boolean executeStatement(String statement) {
-        return false;
+    public void executeStatement(List<String> statements) {
+
     }
 }

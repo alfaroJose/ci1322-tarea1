@@ -1,6 +1,8 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
 import ucr.ac.ecci.ci1322.tareaprogramada1.model.Entity;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -9,4 +11,5 @@ import java.util.List;
  */
 public interface CodeGenerator {
     List<String> generateCode(List<Entity> interRep);
+    void generateScript(List<Entity> interRep, String path, String name);
 }

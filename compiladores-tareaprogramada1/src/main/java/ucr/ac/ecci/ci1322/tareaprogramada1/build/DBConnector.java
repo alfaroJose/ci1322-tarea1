@@ -1,20 +1,22 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
+import java.util.List;
+
 /**
  * Abstract class that manages the connections and executes statements to a relational DBMS.
  */
 public abstract class DBConnector {
     private Configuration configuration;
 
-    public DBConnector(Configuration configuration) {
-        this.configuration = configuration;
+    public DBConnector() {
+
     }
 
-    abstract public boolean createConnection();
+    abstract public void createConnection(DBMSConfig config);
 
     abstract public boolean closeConnection();
 
-    abstract public boolean executeStatement(String statement);
+    abstract public void executeStatement(List<String> statements);
 
     public Configuration getConfiguration() {
         return configuration;
