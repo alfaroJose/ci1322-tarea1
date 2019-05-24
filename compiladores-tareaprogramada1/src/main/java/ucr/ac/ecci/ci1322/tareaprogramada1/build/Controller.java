@@ -1,5 +1,7 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
+import ucr.ac.ecci.ci1322.tareaprogramada1.Class1;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,30 +35,44 @@ public class Controller {
     /**
      *  Method that runs the library and creates a DML script or runs it into de DBMS
      */
-    public void run(){
+    public void run()throws Exception{
         boolean generateScript = confirmationMessage("Generate the DML script in a file y/n: ");
         boolean runScript = confirmationMessage("Run the DML script in a DBMS y/n: ");
         if(generateScript){
             FileConfig fileConfig = new FileConfig();
             List<String> packagesList = new ArrayList<>();
             Package[] packages = Package.getPackages();
-            String scannedPackage;
             for(Package pack : packages){
                 packagesList.add(pack.getName());
-                scannedPackage = pack.getName();
-                scanner.scan(scannedPackage);
+                scanner.scan(pack.getName());
             }
-            scanner.printClasses();
-            scanner.printTables();
-            scanner.printColumns();
+            scanner.scannerPrintInfo();
 
             builder.parse(scanner.getClassList());
 
+            if(fileConfig.getDatabase() == Databases.MYSQL){
+                codeGenerator = new MySQLCodeGenerator();
+            }
+            else if(fileConfig.getDatabase() == Databases.POSTGRESQL){
+                codeGenerator = new PostGreSQLCodeGenerator();
+            }
+
+            codeGenerator.generateCode(builder.getInterRep());
+            codeGenerator.generateScript(builder.getInterRep(), fileConfig);
+
             if(runScript){
-                System.out.println("hihi");
+                DBMSConfig dbmsConfig = new DBMSConfig();
+                if(dbmsConfig.getDatabase() == Databases.MYSQL){
+                    connector = new MySQLConnector();
+                }
+                else if(dbmsConfig.getDatabase() == Databases.POSTGRESQL){
+                    connector = new PostgreSQLConnector();
+                }
+                connector.createConnection(dbmsConfig);
+                connector.executeStatement(codeGenerator.getStatements());
+                connector.closeConnection();
             }
         }
-
     }
 
     /**

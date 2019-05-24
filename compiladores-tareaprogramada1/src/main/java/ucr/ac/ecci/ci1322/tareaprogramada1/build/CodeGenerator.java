@@ -1,7 +1,6 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
-import ucr.ac.ecci.ci1322.tareaprogramada1.model.Entity;
-
+import ucr.ac.ecci.ci1322.tareaprogramada1.model.EntityData;
 import java.io.File;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import java.util.List;
  * of classes with hibernate annotations.
  */
 public interface CodeGenerator {
-    List<String> generateCode(List<Entity> interRep);
-    void generateScript(List<Entity> interRep, String path, String name);
+    List<String> generateCode(List<EntityData> interRep);
+    void generateScript(List<EntityData> interRep, FileConfig fileConfig);
+    List<String> getStatements();
 }

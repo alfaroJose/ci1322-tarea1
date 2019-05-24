@@ -4,31 +4,31 @@ import ucr.ac.ecci.ci1322.tareaprogramada1.model.Relation.Relation;
 
 import java.util.List;
 
-public class Entity {
+public class EntityData {
     private String name;
     private String strategy;
     private Relation relation;
-    private List<Column> columns;
-    private Column primaryKey;
+    private List<ColumnData> columnDataList;
+    private ColumnData primaryKey;
 
-    public Entity() {
+    public EntityData() {
         this.name = "";
         this.strategy = "";
         this.relation = null;
-        this.columns = null;
+        this.columnDataList = null;
         this.primaryKey = null;
     }
 
-    public Entity(String name, String strategy, Relation relation, List<Column> columns, Column primaryKey) {
+    public EntityData(String name, String strategy, Relation relation, List<ColumnData> columnDataList, ColumnData primaryKey) {
         this.name = name;
         this.strategy = strategy;
         this.relation = relation;
-        this.columns = columns;
+        this.columnDataList = columnDataList;
         this.primaryKey = primaryKey;
     }
 
     public String toString(){
-        return name + strategy + relation.toString() + columns.toString() + primaryKey.toString();
+        return name + strategy + relation.toString() + columnDataList.toString() + primaryKey.toString();
     }
 
     public String getName() {
@@ -55,19 +55,19 @@ public class Entity {
         this.relation = relation;
     }
 
-    public List<Column> getColumns() {
-        return columns;
+    public List<ColumnData> getColumnDataList() {
+        return columnDataList;
     }
 
-    public void setColumns(List<Column> columns) {
-        this.columns = columns;
+    public void setColumnDataList(List<ColumnData> columnDataList) {
+        this.columnDataList = columnDataList;
     }
 
-    public Column getPrimaryKey() {
+    public ColumnData getPrimaryKey() {
         return primaryKey;
     }
 
-    public void setPrimaryKey(Column primaryKey) {
+    public void setPrimaryKey(ColumnData primaryKey) {
         this.primaryKey = primaryKey;
     }
 }

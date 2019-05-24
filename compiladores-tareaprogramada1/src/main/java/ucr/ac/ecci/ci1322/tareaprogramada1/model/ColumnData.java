@@ -1,6 +1,6 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.model;
 
-public class Column {
+public class ColumnData {
     private String name;
     private String type;
     private boolean updatable;
@@ -14,7 +14,7 @@ public class Column {
     private boolean id;
     private String discriminatorColumn;
 
-    public Column() {
+    public ColumnData() {
         this.name = "";
         this.type = "";
         this.updatable = true;
@@ -29,8 +29,8 @@ public class Column {
         this.discriminatorColumn = "";
     }
 
-    public Column(String name, String type, boolean updatable, boolean nullable, String length, String precision, String scale,
-                  boolean lob, String enumerated, boolean isTransient, boolean id, String discriminatorColumn) {
+    public ColumnData(String name, String type, boolean updatable, boolean nullable, String length, String precision, String scale,
+                      boolean lob, String enumerated, boolean isTransient, boolean id, String discriminatorColumn) {
         this.name = name;
         this.type = type;
         this.updatable = updatable;

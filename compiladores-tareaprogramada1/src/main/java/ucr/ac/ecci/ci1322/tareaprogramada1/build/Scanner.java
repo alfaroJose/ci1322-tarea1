@@ -39,48 +39,48 @@ public class Scanner {
         for (BeanDefinition bd : provider.findCandidateComponents(packageName)) {
             String name = bd.getBeanClassName();
             try {
-                if(!classList.contains(Class.forName(name))) {
+                if(!classList.contains(Class.forName(name)))
                     classList.add(Class.forName(name));
-
-                    //System.out.println(Class.forName(name).getName());
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        System.out.println("[INFO]Classes scanned for annotations");
+    }
 
+    public void scannerPrintInfo(){
+        printClasses();
+        printTables();
+        printColumns();
     }
 
     //Print annotated column names
-    public void printColumns(){
+    private void printColumns(){
         for(Class cl : classList){
             for (Field f: cl.getDeclaredFields()) {
                 Column column = f.getAnnotation(Column.class);
                 if (column != null)
-                    System.out.printf("class: %s, column: %s%n" ,cl.getName(),column.name());
+                    System.out.printf("[INFO]class: %s, column: %s%n" ,cl.getName(),column.name());
                 if (f.isAnnotationPresent(Id.class))
-                {
-                    System.out.printf("id field name: %s%n",f.getName());
-                }
+                    System.out.printf("[INFO]id field name: %s%n",f.getName());
             }
         }
-
     }
 
     //Print annotated table names
-    public void printTables(){
+    private void printTables(){
         for(Class cl : classList){
             //System.out.println(cl.getName());
             Table tabl = (Table) cl.getAnnotation(Table.class);
             if (tabl != null)
-                System.out.printf("class: %s, table: %s%n" ,cl.getName(),tabl.name());
+                System.out.printf("[INFO]class: %s, table: %s%n" ,cl.getName(),tabl.name());
         }
     }
 
-    public void printClasses(){
-        System.out.println("Classes with hibernate annotations in the project package: ");
+    private void printClasses(){
+        System.out.println("[INFO]Classes with hibernate annotations in the project package: ");
         for( Class cl : classList)
-            System.out.println(cl.getName());
+            System.out.println("[INFO]" + cl.getName());
     }
 
     public List<Class> getClassList() {

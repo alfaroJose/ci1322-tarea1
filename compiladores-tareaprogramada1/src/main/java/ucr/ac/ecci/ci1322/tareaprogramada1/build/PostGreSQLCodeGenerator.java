@@ -1,6 +1,9 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
-import ucr.ac.ecci.ci1322.tareaprogramada1.model.Entity;
+import ucr.ac.ecci.ci1322.tareaprogramada1.model.EntityData;
+
+import javax.persistence.Entity;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,11 +12,20 @@ import java.util.List;
  * Implements the CodeGenerator interface.
  */
 public class PostGreSQLCodeGenerator implements CodeGenerator {
+    private List<String> statements;
+
+    public PostGreSQLCodeGenerator() {
+        statements = new ArrayList<>();
+    }
+
     @Override
-    public List<String> generateCode(List<Entity> interRep) {
+    public List<String> generateCode(List<EntityData> interRep) {
         return null;
     }
-    public void generateScript(List<Entity> interRep, String path, String name)  {
 
-    };
+    public void generateScript(List<EntityData> interRep, FileConfig fileConfig)  { }
+
+    public List<String> getStatements() {
+        return statements;
+    }
 }
