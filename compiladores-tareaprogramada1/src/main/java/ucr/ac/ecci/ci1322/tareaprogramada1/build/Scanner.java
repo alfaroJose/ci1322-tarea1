@@ -45,10 +45,10 @@ public class Scanner {
                 e.printStackTrace();
             }
         }
-        System.out.println("[INFO]Classes scanned for annotations");
     }
 
     public void scannerPrintInfo(){
+        System.out.println("[INFO]Classes scanned for annotations:");
         printClasses();
         printTables();
         printColumns();

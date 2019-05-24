@@ -2,8 +2,11 @@ package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
 import ucr.ac.ecci.ci1322.tareaprogramada1.model.EntityData;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,16 +42,36 @@ public class IRBuilder {
     }
 
     public void parseEntity(Class temp)throws Exception{
+        boolean isEntity = false;
         EntityData entityData = new EntityData();
         for( Annotation annotation : temp.getAnnotations()){
             Class<? extends Annotation> type = annotation.annotationType();
             System.out.println("Values of " + type.getSimpleName());
-            for (Method method : type.getDeclaredMethods()) {
-                Object value = method.invoke(annotation, (Object[])null);
-                System.out.println(" " + method.getName() + ": " + value);
+            if(type.getSimpleName().equals("Entity"))
+                isEntity = true;
+            else if (type.getSimpleName().equals("Table") && isEntity){
+                for (Method method : type.getDeclaredMethods()) {
+                    if(method.getName().equals("name")){
+                        Object value = method.invoke(annotation, (Object[])null);
+                        entityData.setName(value.toString());
+                        System.out.println(" " + method.getName() + ": " + value);
+                        System.out.println(entityData.getName());
+                    }
+                }
             }
         }
+        parseColumns(temp);
         interRep.add(entityData);
+    }
+
+    public void parseColumns(Class temp){
+        for (Field f: temp.getDeclaredFields()) {
+            Column column = f.getAnnotation(Column.class);
+            if (column != null)
+                System.out.printf("[INFO]class: %s, column: %s%n" ,temp.getName(),column.name());
+            if (f.isAnnotationPresent(Id.class))
+                System.out.printf("[INFO]id field name: %s%n",f.getName());
+        }
     }
 
     public List<EntityData> getInterRep() {
