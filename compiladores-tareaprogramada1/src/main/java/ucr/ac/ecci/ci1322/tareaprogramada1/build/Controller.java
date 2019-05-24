@@ -50,24 +50,21 @@ public class Controller {
 
             builder.parse(scanner.getClassList());
 
-            /*if(fileConfig.getDatabase() == Databases.MYSQL){
+            /*if(fileConfig.getDatabase() == Databases.MYSQL)
                 codeGenerator = new MySQLCodeGenerator();
-            }
-            else if(fileConfig.getDatabase() == Databases.POSTGRESQL){
+            else if(fileConfig.getDatabase() == Databases.POSTGRESQL)
                 codeGenerator = new PostGreSQLCodeGenerator();
-            }
 
             codeGenerator.generateCode(builder.getInterRep());
             codeGenerator.generateScript(builder.getInterRep(), fileConfig);*/
 
             if(runScript){
                 DBMSConfig dbmsConfig = new DBMSConfig();
-                if(dbmsConfig.getDatabase() == Databases.MYSQL){
+                if(dbmsConfig.getDatabase() == Databases.MYSQL)
                     connector = new MySQLConnector();
-                }
-                else if(dbmsConfig.getDatabase() == Databases.POSTGRESQL){
+                else if(dbmsConfig.getDatabase() == Databases.POSTGRESQL)
                     connector = new PostgreSQLConnector();
-                }
+
                 connector.createConnection(dbmsConfig);
                 connector.executeStatement(codeGenerator.getStatements());
                 connector.closeConnection();

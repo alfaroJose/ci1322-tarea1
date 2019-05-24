@@ -42,7 +42,9 @@ public class FileConfig extends Configuration {
             else
                 System.out.println("Please answer 1 or 2");
         }
+        System.out.println("Insert the file name to save the script: ");
         fileName = scan.nextLine();
+        System.out.println("Insert the file path to save the script: ");
         filePath = scan.nextLine();
         System.out.println("[INFO]File configuration done");
     }

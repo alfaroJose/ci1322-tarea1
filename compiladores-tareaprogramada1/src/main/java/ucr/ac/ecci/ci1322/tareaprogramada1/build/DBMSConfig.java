@@ -56,7 +56,7 @@ public class DBMSConfig extends Configuration {
         userName = scan.nextLine();
         System.out.println("Insert the password of the user " + userName + " in the DBMS");
         password = scan.nextLine();
-        System.out.println("Insert the host yopu want to use in the DBMS");
+        System.out.println("Insert the host you want to use in the DBMS");
         host = scan.nextLine();
         System.out.println("Insert the scheme in which you want to work in the DBMS");
         schema = scan.nextLine();

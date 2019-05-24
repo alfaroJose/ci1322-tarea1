@@ -30,7 +30,6 @@ public class MySQLCodeGenerator implements CodeGenerator {
                 statement.append(System.lineSeparator());
                 statement.append("\t");
                 statement.append(col.getName() + " " + "VARCHAR (100),");
-
             }
             statement.deleteCharAt(statement.length() -1); //borra ultima coma
             statement.append(");");
