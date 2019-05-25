@@ -15,10 +15,18 @@ public class MySQLConnector extends DBConnector {
     public void createConnection(DBMSConfig config) {
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            connection=DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/" + config.getSchema(),
-                    config.getUserName(),
-                    config.getPassword());
+
+            //url tiene la forma: "jdbc:mysql://host_name:port/schema"
+
+            String url = "jdbc:mysql://" +
+                    config.getHost() + ":" +
+                    config.getPort() + "/" +
+                    config.getSchema();
+            String user = config.getUserName();
+            String pass = config.getPassword();
+
+            connection = DriverManager.getConnection(url, user, pass);
+
         }catch(Exception e){
             e.printStackTrace();
         }

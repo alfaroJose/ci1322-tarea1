@@ -29,9 +29,6 @@ public class EntityData {
         columnDataList.add(columnData);
     }
 
-    public String toString(){
-        return name + strategy + relation.toString() + columnDataList.toString();
-    }
 
     public String getName() {
         return name;

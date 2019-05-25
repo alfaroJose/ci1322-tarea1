@@ -22,20 +22,34 @@ public class MySQLCodeGenerator implements CodeGenerator {
     }
 
     @Override
-    public List<String> generateCode(List<EntityData> interRep) {
+    public void generateCode(List<EntityData> interRep) {
         for(EntityData ent : interRep) {
             StringBuilder statement = new StringBuilder();
-            statement.append("CREATE TABLE " + ent.getName() + " (");
+            statement.append("CREATE TABLE " + ent.getName() + " ("); //table name
             for(ColumnData col: ent.getColumnDataList()){
                 statement.append(System.lineSeparator());
-                statement.append("\t");
-                statement.append(col.getName() + " " + "VARCHAR (100),");
+                //statement.append("\t");
+                statement.append(col.getName() + " "); //column name
+                if(col.isLob())
+                    statement.append("BLOB");
+                else if(col.getType() == "String")
+                    statement.append(castType(col.getType()) + "(" + col.getLength() + ")");
+                else
+                    statement.append(castType(col.getType()));
+                if(!col.isNullable())
+                    statement.append(" NOT NULL");
+                statement.append(","); //column separator
+                if(col.isId()){
+                    //statement.append(System.lineSeparator());
+                    //statement.append("\t");
+                    statement.append("PRIMARY KEY (" + col.getName() + "),");
+                }
             }
-            statement.deleteCharAt(statement.length() -1); //borra ultima coma
+            statement.deleteCharAt(statement.length() -1); //delete last comma
+            //statement.append(System.lineSeparator());
             statement.append(");");
             statements.add(statement.toString());
         }
-        return statements;
     }
 
     public void generateScript(List<EntityData> interRep, FileConfig fileConfig){
@@ -45,9 +59,24 @@ public class MySQLCodeGenerator implements CodeGenerator {
             for(ColumnData col: ent.getColumnDataList()){
                 script.append(System.lineSeparator());
                 script.append("\t");
-                script.append(col.getName() + " " + "VARCHAR (100),");
+                script.append(col.getName() + " "); //column name
+                if(col.isLob())
+                    script.append("BLOB");
+                else if(col.getType() == "String")
+                    script.append(castType(col.getType()) + "(" + col.getLength() + ")");
+                else
+                    script.append(castType(col.getType()));
+                if(!col.isNullable())
+                    script.append(" NOT NULL");
+                script.append(","); //column separator
+                if(col.isId()){
+                    script.append(System.lineSeparator());
+                    script.append("\t");
+                    script.append("PRIMARY KEY (" + col.getName() + "),");
+                }
             }
-            script.deleteCharAt(script.length() -1); //borra ultima coma
+            script.deleteCharAt(script.length() -1); //delete last comma
+            script.append(System.lineSeparator());
             script.append(");");
             script.append(System.lineSeparator());
             script.append(System.lineSeparator());
@@ -64,5 +93,27 @@ public class MySQLCodeGenerator implements CodeGenerator {
 
     public List<String> getStatements() {
         return statements;
+    }
+
+    public String castType(String type){
+        String newtype = "";
+        switch (type){
+            case "String":
+                newtype = "VARCHAR";
+                break;
+            case "char":
+                newtype = "CHAR";
+                break;
+            case "int":
+                newtype = "INT";
+                break;
+            case "float":
+                newtype = "FLOAT";
+                break;
+            case "double":
+                newtype = "DOUBLE";
+                break;
+        }
+        return newtype;
     }
 }

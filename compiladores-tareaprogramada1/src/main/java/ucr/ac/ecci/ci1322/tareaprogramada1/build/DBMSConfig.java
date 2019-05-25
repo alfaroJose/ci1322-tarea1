@@ -11,15 +11,17 @@ public class DBMSConfig extends Configuration {
     private String userName;
     private String password;
     private String host;
+    private String port;
     private String schema;
     private Databases database;
 
-    public DBMSConfig(String userName, String password, String host,
+    public DBMSConfig(String userName, String password, String host, String port,
                       String schema, Databases database) {
         super();
         this.userName = userName;
         this.password = password;
         this.host = host;
+        this.port = port;
         this.schema = schema;
         this.database = database;
     }
@@ -29,6 +31,7 @@ public class DBMSConfig extends Configuration {
         this.userName = "";
         this.password = "";
         this.host = "";
+        this.port = "";
         this.schema = "";
         this.database = null;
         askConfig();
@@ -58,6 +61,8 @@ public class DBMSConfig extends Configuration {
         password = scan.nextLine();
         System.out.println("Insert the host you want to use in the DBMS");
         host = scan.nextLine();
+        System.out.println("Insert the port you want to use in the DBMS");
+        port = scan.nextLine();
         System.out.println("Insert the scheme in which you want to work in the DBMS");
         schema = scan.nextLine();
         System.out.println("[INFO]DBMS configuration done");
@@ -76,6 +81,14 @@ public class DBMSConfig extends Configuration {
     }
 
     public void setPassword(String password) { this.password = password; }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
 
     public String getHost() {
         return host;

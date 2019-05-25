@@ -9,7 +9,7 @@ import java.util.List;
  * of classes with hibernate annotations.
  */
 public interface CodeGenerator {
-    List<String> generateCode(List<EntityData> interRep);
+    void generateCode(List<EntityData> interRep);
     void generateScript(List<EntityData> interRep, FileConfig fileConfig);
     List<String> getStatements();
 }

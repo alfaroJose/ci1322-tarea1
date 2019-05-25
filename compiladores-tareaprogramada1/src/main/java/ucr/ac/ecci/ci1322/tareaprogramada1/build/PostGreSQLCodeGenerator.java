@@ -19,9 +19,7 @@ public class PostGreSQLCodeGenerator implements CodeGenerator {
     }
 
     @Override
-    public List<String> generateCode(List<EntityData> interRep) {
-        return null;
-    }
+    public void generateCode(List<EntityData> interRep) {}
 
     public void generateScript(List<EntityData> interRep, FileConfig fileConfig)  { }
 
