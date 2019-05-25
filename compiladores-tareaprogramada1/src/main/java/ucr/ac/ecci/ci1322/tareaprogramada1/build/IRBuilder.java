@@ -53,18 +53,12 @@ public class IRBuilder {
             for( Field field : fields){
                 columnData = new ColumnData();
                 for( Annotation annotation : field.getAnnotations()){
-                    if(annotation.annotationType().getSimpleName().equals("Id")){
-                        Id id = field.getAnnotation(Id.class);
+                    if(annotation.annotationType().getSimpleName().equals("Id"))
                         columnData.setId(true);
-                    }
-                    if(annotation.annotationType().getSimpleName().equals("Lob")){
-                        Lob lob = field.getAnnotation(Lob.class);
+                    if(annotation.annotationType().getSimpleName().equals("Lob"))
                         columnData.setLob(true);
-                    }
-                    if(annotation.annotationType().getSimpleName().equals("Transient")){
-                        Transient aTransient = field.getAnnotation(Transient.class);
+                    if(annotation.annotationType().getSimpleName().equals("Transient"))
                         columnData.setTransient(true);
-                    }
                     if(annotation.annotationType().getSimpleName().equals("Column")){
                         Column column = field.getAnnotation(Column.class);
                         columnData.setName(column.name());
