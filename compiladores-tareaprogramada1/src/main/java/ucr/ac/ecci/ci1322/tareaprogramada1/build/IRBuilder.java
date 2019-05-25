@@ -62,7 +62,7 @@ public class IRBuilder {
                         columnData.setLob(true);
                     }
                     if(annotation.annotationType().getSimpleName().equals("Transient")){
-                        Transient lob = field.getAnnotation(Transient.class);
+                        Transient aTransient = field.getAnnotation(Transient.class);
                         columnData.setTransient(true);
                     }
                     if(annotation.annotationType().getSimpleName().equals("Column")){
