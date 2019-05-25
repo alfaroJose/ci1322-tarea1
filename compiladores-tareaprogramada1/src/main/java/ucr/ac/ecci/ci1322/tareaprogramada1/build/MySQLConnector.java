@@ -11,6 +11,10 @@ public class MySQLConnector extends DBConnector {
 
     public MySQLConnector() {}
 
+    /**
+     * Connect to a MYSQL database with credentials from config parameter
+     * @param config
+     */
     @Override
     public void createConnection(DBMSConfig config) {
         try{
@@ -37,6 +41,10 @@ public class MySQLConnector extends DBConnector {
         return false;
     }
 
+    /**
+     * Execute in the batch the statement list
+     * @param statements
+     */
     @Override
     public void executeStatement(List<String> statements) {
         try{
