@@ -19,7 +19,7 @@ public class MySQLCodeGenerator implements CodeGenerator {
     }
 
     /**
-     * Populate List<String> statements with mysql statements to create each Entity and its Columns
+     * Populate List<String> statements with MYSQL statements to create each Entity and its Columns
      */
     @Override
     public void generateCode(List<EntityData> interRep) {

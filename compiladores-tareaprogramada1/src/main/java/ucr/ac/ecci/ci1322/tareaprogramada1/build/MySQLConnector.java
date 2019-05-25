@@ -45,7 +45,7 @@ public class MySQLConnector extends DBConnector {
     }
 
     /**
-     * Execute in the batch the statement list
+     * Execute in batch the statement list
      * @param statements
      */
     @Override
