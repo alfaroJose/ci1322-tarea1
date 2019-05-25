@@ -21,7 +21,6 @@ public class MySQLConnector extends DBConnector {
             Class.forName("com.mysql.jdbc.Driver");
 
             //url tiene la forma: "jdbc:mysql://host_name:port/schema"
-
             String url = "jdbc:mysql://" +
                     config.getHost() + ":" +
                     config.getPort() + "/" +
@@ -37,8 +36,12 @@ public class MySQLConnector extends DBConnector {
     }
 
     @Override
-    public boolean closeConnection() {
-        return false;
+    public void closeConnection() {
+        try{
+            connection.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

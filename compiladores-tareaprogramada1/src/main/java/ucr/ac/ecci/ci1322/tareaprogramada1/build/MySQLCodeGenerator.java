@@ -27,12 +27,15 @@ public class MySQLCodeGenerator implements CodeGenerator {
             StringBuilder statement = new StringBuilder();
             statement.append("CREATE TABLE " + ent.getName() + " ("); //table name
             for(ColumnData col: ent.getColumnDataList()){
-                statement.append(System.lineSeparator());
                 statement.append(col.getName() + " "); //column name
                 if(col.isLob())
                     statement.append("BLOB");
-                else if(col.getType() == "String")
-                    statement.append(castType(col.getType()) + "(" + col.getLength() + ")"); //cast to MYSQL types
+                else if(col.getType().equals("String")){
+                    String len = col.getLength();
+                    if(len == "")
+                        len = "255";
+                    statement.append(castType(col.getType()) + "(" + len + ")"); //cast to MYSQL types
+                }
                 else
                     statement.append(castType(col.getType()));
                 if(!col.isNullable())
@@ -43,7 +46,6 @@ public class MySQLCodeGenerator implements CodeGenerator {
                 }
             }
             statement.deleteCharAt(statement.length() -1); //delete last comma
-            //statement.append(System.lineSeparator());
             statement.append(");");
             statements.add(statement.toString());
         }
@@ -65,8 +67,12 @@ public class MySQLCodeGenerator implements CodeGenerator {
                 script.append(col.getName() + " "); //column name
                 if(col.isLob())
                     script.append("BLOB");
-                else if(col.getType() == "String")
-                    script.append(castType(col.getType()) + "(" + col.getLength() + ")");
+                else if(col.getType().equals("String")){
+                    String len = col.getLength();
+                    if(len == "")
+                        len = "255";
+                    script.append(castType(col.getType()) + "(" + len + ")"); //cast to MYSQL types
+                }
                 else
                     script.append(castType(col.getType()));
                 if(!col.isNullable())

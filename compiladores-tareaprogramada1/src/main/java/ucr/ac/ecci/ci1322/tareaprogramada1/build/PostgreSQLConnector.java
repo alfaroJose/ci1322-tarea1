@@ -15,9 +15,7 @@ public class PostgreSQLConnector extends DBConnector {
     }
 
     @Override
-    public boolean closeConnection() {
-        return false;
-    }
+    public void closeConnection() {}
 
     @Override
     public void executeStatement(List<String> statements) {
