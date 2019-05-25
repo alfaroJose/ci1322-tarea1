@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Table(name = "EMPLOYEE")
 public class Class1 {
     @Id
-    @GeneratedValue
     @Column(name = "id")
     private int id;
 
@@ -20,7 +19,13 @@ public class Class1 {
     private String lastName;
 
     @Column(name = "salary")
-    private int salary;
+    private float salary;
+
+    @Column(name = "money")
+    private double money;
+
+    @Column(name = "luckyletter")
+    private char luckyletter;
 
     public Class1() {}
 
@@ -48,7 +53,7 @@ public class Class1 {
         this.lastName = last_name;
     }
 
-    public int getSalary() {
+    public float getSalary() {
         return salary;
     }
 

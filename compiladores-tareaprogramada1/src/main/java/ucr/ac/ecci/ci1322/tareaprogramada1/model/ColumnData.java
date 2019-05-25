@@ -3,7 +3,6 @@ package ucr.ac.ecci.ci1322.tareaprogramada1.model;
 public class ColumnData {
     private String name;
     private String type;
-    private boolean updatable;
     private boolean nullable;
     private String length;
     private String precision;
@@ -17,23 +16,21 @@ public class ColumnData {
     public ColumnData() {
         this.name = "";
         this.type = "";
-        this.updatable = true;
-        this.nullable = true;
+        this.nullable = false;
         this.length = "";
         this.precision = "";
         this.scale = "";
-        this.lob = true;
+        this.lob = false;
         this.enumerated = "";
-        this.isTransient = true;
-        this.id = true;
+        this.isTransient = false;
+        this.id = false;
         this.discriminatorColumn = "";
     }
 
-    public ColumnData(String name, String type, boolean updatable, boolean nullable, String length, String precision, String scale,
+    public ColumnData(String name, String type, boolean nullable, String length, String precision, String scale,
                       boolean lob, String enumerated, boolean isTransient, boolean id, String discriminatorColumn) {
         this.name = name;
         this.type = type;
-        this.updatable = updatable;
         this.nullable = nullable;
         this.length = length;
         this.precision = precision;
@@ -60,14 +57,6 @@ public class ColumnData {
     public String getType() { return type; }
 
     public void setType(String type) { this.type = type; }
-
-    public boolean isUpdatable() {
-        return updatable;
-    }
-
-    public void setUpdatable(boolean updatable) {
-        this.updatable = updatable;
-    }
 
     public boolean isNullable() {
         return nullable;

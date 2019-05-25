@@ -1,11 +1,9 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.build;
 
+import ucr.ac.ecci.ci1322.tareaprogramada1.model.ColumnData;
 import ucr.ac.ecci.ci1322.tareaprogramada1.model.EntityData;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -18,16 +16,13 @@ import java.util.List;
  */
 public class IRBuilder {
     private List<EntityData> interRep;
-    private IRValidator validator;
 
-    public IRBuilder(List<EntityData> interRep, IRValidator validator) {
+    public IRBuilder(List<EntityData> interRep) {
         this.interRep = interRep;
-        this.validator = validator;
     }
 
     public IRBuilder() {
         this.interRep = new ArrayList<>();
-        this.validator = new IRValidator();
     }
 
     /**
@@ -48,37 +43,43 @@ public class IRBuilder {
         if (entity != null){
             Table tabl = (Table) temp.getAnnotation(Table.class);
             if (tabl != null){
-                if( tabl.name().equals("") ) {
+                if( tabl.name().equals("") )
                     entityData.setName(temp.getSimpleName());
-                }
-                else {
+                else
                     entityData.setName(tabl.name());
+            }
+            Field fields[] = temp.getDeclaredFields();
+            ColumnData columnData;
+            for( Field field : fields){
+                columnData = new ColumnData();
+                for( Annotation annotation : field.getAnnotations()){
+                    if(annotation.annotationType().getSimpleName().equals("Id")){
+                        Id id = field.getAnnotation(Id.class);
+                        columnData.setId(true);
+                    }
+                    if(annotation.annotationType().getSimpleName().equals("Lob")){
+                        Lob lob = field.getAnnotation(Lob.class);
+                        columnData.setLob(true);
+                    }
+                    if(annotation.annotationType().getSimpleName().equals("Transient")){
+                        Transient lob = field.getAnnotation(Transient.class);
+                        columnData.setTransient(true);
+                    }
+                    if(annotation.annotationType().getSimpleName().equals("Column")){
+                        Column column = field.getAnnotation(Column.class);
+                        columnData.setName(column.name());
+                        columnData.setType(field.getType().getSimpleName());
+                        if(field.getType().getSimpleName().equals("String"))
+                            columnData.setLength("" + column.length());
+                        else if(field.getType().getSimpleName().equals("double") || field.getType().getSimpleName().equals("float"))
+                            columnData.setPrecision("" + column.precision());
+
+                    }
                 }
+                entityData.addColumnData(columnData);
             }
         }
-
-        Field fields[] = temp.getDeclaredFields();
-        for( Field field : fields){
-            for( Annotation annotation : field.getAnnotations()){
-                Class<? extends Annotation> type = annotation.annotationType();
-                System.out.println("Values of " + type.getSimpleName());
-
-
-            }
-        }
-
-        parseColumns(temp);
         interRep.add(entityData);
-    }
-
-    public void parseColumns(Class temp){
-        for (Field f: temp.getDeclaredFields()) {
-            Column column = f.getAnnotation(Column.class);
-            if (column != null)
-                System.out.printf("[INFO]class: %s, column: %s%n" ,temp.getName(),column.name());
-            if (f.isAnnotationPresent(Id.class))
-                System.out.printf("[INFO]id field name: %s%n",f.getName());
-        }
     }
 
     public List<EntityData> getInterRep() {
@@ -87,13 +88,5 @@ public class IRBuilder {
 
     public void setInterRep(List<EntityData> interRep) {
         this.interRep = interRep;
-    }
-
-    public IRValidator getValidator() {
-        return validator;
-    }
-
-    public void setValidator(IRValidator validator) {
-        this.validator = validator;
     }
 }
