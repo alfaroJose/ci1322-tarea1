@@ -75,7 +75,7 @@ public class Controller {
     /**
      * Method that ask the user to press "y" or "n" to confirm a message
      * @param message the message to be shown
-     * @return true if the "y" is the input or false if the "n" is.
+     * @return true if the "y" is the input or false if the "n" is
      */
     private boolean confirmationMessage(String message){
         java.util.Scanner scan = new java.util.Scanner(System.in);
