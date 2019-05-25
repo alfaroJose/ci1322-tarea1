@@ -8,7 +8,6 @@ public class ColumnData {
     private String precision;
     private String scale;
     private boolean lob;
-    private String enumerated;
     private boolean isTransient ;
     private boolean id;
     private String discriminatorColumn;
@@ -21,14 +20,13 @@ public class ColumnData {
         this.precision = "";
         this.scale = "";
         this.lob = false;
-        this.enumerated = "";
         this.isTransient = false;
         this.id = false;
         this.discriminatorColumn = "";
     }
 
     public ColumnData(String name, String type, boolean nullable, String length, String precision, String scale,
-                      boolean lob, String enumerated, boolean isTransient, boolean id, String discriminatorColumn) {
+                      boolean lob, boolean isTransient, boolean id, String discriminatorColumn) {
         this.name = name;
         this.type = type;
         this.nullable = nullable;
@@ -36,7 +34,6 @@ public class ColumnData {
         this.precision = precision;
         this.scale = scale;
         this.lob = lob;
-        this.enumerated = enumerated;
         this.isTransient = isTransient;
         this.id = id;
         this.discriminatorColumn = discriminatorColumn;
@@ -96,14 +93,6 @@ public class ColumnData {
 
     public void setLob(boolean lob) {
         this.lob = lob;
-    }
-
-    public String getEnumerated() {
-        return enumerated;
-    }
-
-    public void setEnumerated(String enumerated) {
-        this.enumerated = enumerated;
     }
 
     public boolean isTransient() {
