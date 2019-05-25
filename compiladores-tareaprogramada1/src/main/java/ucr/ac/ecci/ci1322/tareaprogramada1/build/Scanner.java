@@ -28,9 +28,8 @@ public class Scanner {
     }
 
     /**
-     * Check the package to find classes with hibernate annotations
+     * Method that checks the package to find classes with hibernate annotations
      * @param packageName the name of the package
-     * @return a List with the classes with hibernate annotations
      */
     public void scan(String packageName){
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
@@ -47,6 +46,9 @@ public class Scanner {
         }
     }
 
+    /**
+     * Method that prints the informations of the annotations founded.
+     */
     public void scannerPrintInfo(){
         System.out.println("[INFO]Classes scanned for annotations:");
         printClasses();
@@ -54,7 +56,9 @@ public class Scanner {
         printColumns();
     }
 
-    //Print annotated column names
+    /**
+     * Print annotated column names
+     */
     private void printColumns(){
         for(Class cl : classList){
             for (Field f: cl.getDeclaredFields()) {
@@ -67,7 +71,9 @@ public class Scanner {
         }
     }
 
-    //Print annotated table names
+    /**
+     * Print annotated table names
+     */
     private void printTables(){
         for(Class cl : classList){
             //System.out.println(cl.getName());
@@ -77,12 +83,19 @@ public class Scanner {
         }
     }
 
+    /**
+     * Print annotated class names
+     */
     private void printClasses(){
         System.out.println("[INFO]Classes with hibernate annotations in the project package: ");
         for( Class cl : classList)
             System.out.println("[INFO]" + cl.getName());
     }
 
+    /**
+     * Returns the class list of the Scanner class
+     * @return a List with the classes with hibernate annotations
+     */
     public List<Class> getClassList() {
         return classList;
     }

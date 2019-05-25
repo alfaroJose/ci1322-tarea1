@@ -28,7 +28,6 @@ public class IRBuilder {
     /**
      * Method that parses a List of Classes with hibernate annotations into an intermediate representation
      * @param classes the list of classes
-     * @return a list with all the entities that represents each class and their information.
      */
     public void parse(List<Class> classes)throws Exception{
         for( Class cl : classes ) {
@@ -37,6 +36,10 @@ public class IRBuilder {
         System.out.println("[INFO]Classes parsed to an intermediate representation");
     }
 
+    /**
+     * Method that parses individual entities if possible
+     * @param temp the class to be parsed
+     */
     public void parseEntity(Class temp)throws Exception{
         EntityData entityData = new EntityData();
         Entity entity = (Entity) temp.getAnnotation(Entity.class);
@@ -78,6 +81,10 @@ public class IRBuilder {
         interRep.add(entityData);
     }
 
+    /**
+     * Method that returns the intermediate representation of the classes
+     * @return a list with all the entities that represents each class and their information.
+     */
     public List<EntityData> getInterRep() {
         return interRep;
     }

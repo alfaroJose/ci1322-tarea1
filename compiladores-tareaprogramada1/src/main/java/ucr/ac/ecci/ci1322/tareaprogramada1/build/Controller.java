@@ -39,7 +39,7 @@ public class Controller {
         boolean generateScript = confirmationMessage("Generate the DML script in a file y/n: ");
         boolean runScript = confirmationMessage("Run the DML script in a DBMS y/n: ");
         if(generateScript){
-            //FileConfig fileConfig = new FileConfig();
+            FileConfig fileConfig = new FileConfig();
             List<String> packagesList = new ArrayList<>();
             Package[] packages = Package.getPackages();
             for(Package pack : packages){
@@ -50,13 +50,13 @@ public class Controller {
 
             builder.parse(scanner.getClassList());
 
-            /*if(fileConfig.getDatabase() == Databases.MYSQL)
+            if(fileConfig.getDatabase() == Databases.MYSQL)
                 codeGenerator = new MySQLCodeGenerator();
             else if(fileConfig.getDatabase() == Databases.POSTGRESQL)
                 codeGenerator = new PostGreSQLCodeGenerator();
 
             codeGenerator.generateCode(builder.getInterRep());
-            codeGenerator.generateScript(builder.getInterRep(), fileConfig);*/
+            codeGenerator.generateScript(builder.getInterRep(), fileConfig);
 
             if(runScript){
                 DBMSConfig dbmsConfig = new DBMSConfig();

@@ -5,6 +5,9 @@ import ucr.ac.ecci.ci1322.tareaprogramada1.model.Relation.Relation;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  Class to store the data from a Entity to insert it on a intermediate representation.
+ */
 public class EntityData {
     private String name;
     private String strategy;
@@ -28,7 +31,6 @@ public class EntityData {
     public void addColumnData( ColumnData columnData){
         columnDataList.add(columnData);
     }
-
 
     public String getName() {
         return name;

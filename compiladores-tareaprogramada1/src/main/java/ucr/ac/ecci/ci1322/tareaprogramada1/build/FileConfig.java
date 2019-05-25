@@ -24,6 +24,9 @@ public class FileConfig extends Configuration {
         askFileInfo();
     }
 
+    /**
+     * Method that fills the information of the file configuration
+     */
     private void askFileInfo(){
         java.util.Scanner scan = new java.util.Scanner(System.in);
         String answer;

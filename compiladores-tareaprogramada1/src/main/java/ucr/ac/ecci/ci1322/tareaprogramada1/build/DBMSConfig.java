@@ -37,6 +37,9 @@ public class DBMSConfig extends Configuration {
         askConfig();
     }
 
+    /**
+     * Method that fills the information of the file configuration
+     */
     private void askConfig(){
         java.util.Scanner scan = new java.util.Scanner(System.in);
         String answer;

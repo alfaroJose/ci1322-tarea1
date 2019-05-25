@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * Implements the CodeGenerator interface.
+ * Implements the CodeGenerator interface for MySQL DBMS.
  */
 public class MySQLCodeGenerator implements CodeGenerator {
     private List<String> statements;

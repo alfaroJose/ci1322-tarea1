@@ -1,5 +1,8 @@
 package ucr.ac.ecci.ci1322.tareaprogramada1.model;
 
+/**
+ *  Class to store the data from a Column to insert it on a EntityData list of columns.
+ */
 public class ColumnData {
     private String name;
     private String type;
