@@ -5,8 +5,6 @@ import ucr.ac.ecci.ci1322.tareaprogramada1.model.EntityData;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +19,9 @@ public class MySQLCodeGenerator implements CodeGenerator {
         statements = new ArrayList<>();
     }
 
+    /**
+     * Populate List<String> statements with mysql statements to create each Entity and its Columns
+     */
     @Override
     public void generateCode(List<EntityData> interRep) {
         for(EntityData ent : interRep) {
@@ -28,20 +29,17 @@ public class MySQLCodeGenerator implements CodeGenerator {
             statement.append("CREATE TABLE " + ent.getName() + " ("); //table name
             for(ColumnData col: ent.getColumnDataList()){
                 statement.append(System.lineSeparator());
-                //statement.append("\t");
                 statement.append(col.getName() + " "); //column name
                 if(col.isLob())
                     statement.append("BLOB");
                 else if(col.getType() == "String")
-                    statement.append(castType(col.getType()) + "(" + col.getLength() + ")");
+                    statement.append(castType(col.getType()) + "(" + col.getLength() + ")"); //cast to MYSQL types
                 else
                     statement.append(castType(col.getType()));
                 if(!col.isNullable())
                     statement.append(" NOT NULL");
                 statement.append(","); //column separator
                 if(col.isId()){
-                    //statement.append(System.lineSeparator());
-                    //statement.append("\t");
                     statement.append("PRIMARY KEY (" + col.getName() + "),");
                 }
             }
@@ -52,6 +50,12 @@ public class MySQLCodeGenerator implements CodeGenerator {
         }
     }
 
+    /**
+     * Populate MYSQL script file with statements to create each Entity and its Columns
+     * with corresponding file name and path according to fileConfig.
+     * @param interRep
+     * @param fileConfig
+     */
     public void generateScript(List<EntityData> interRep, FileConfig fileConfig){
         StringBuilder script = new StringBuilder();
         for(EntityData ent : interRep) {
@@ -95,6 +99,11 @@ public class MySQLCodeGenerator implements CodeGenerator {
         return statements;
     }
 
+    /**
+     * Returns the MYSQL equivalent data type for java types
+     * @param type
+     * @return newtype
+     */
     public String castType(String type){
         String newtype = "";
         switch (type){
