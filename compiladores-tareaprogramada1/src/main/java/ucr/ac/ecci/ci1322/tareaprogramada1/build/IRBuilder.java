@@ -51,7 +51,7 @@ public class IRBuilder {
                 else
                     entityData.setName(tabl.name());
             }
-            Field fields[] = temp.getDeclaredFields();
+            Field[] fields = temp.getDeclaredFields();
             ColumnData columnData;
             for( Field field : fields){
                 columnData = new ColumnData();
