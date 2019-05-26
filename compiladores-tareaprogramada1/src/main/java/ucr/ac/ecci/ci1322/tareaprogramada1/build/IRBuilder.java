@@ -73,9 +73,10 @@ public class IRBuilder {
                         else if(field.getType().getSimpleName().equals("double") || field.getType().getSimpleName().equals("float"))
                             columnData.setPrecision("" + column.scale());
                         columnData.setNullable(column.nullable());
+
+                        entityData.addColumnData(columnData);
                     }
                 }
-                entityData.addColumnData(columnData);
             }
         }
         interRep.add(entityData);
